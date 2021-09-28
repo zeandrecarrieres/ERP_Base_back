@@ -29,7 +29,11 @@ const TransactionsSchema = new mongoose.Schema(
     total_price: {
       type: Number,
       required: true,
-    }
+    },
+    obs: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,
