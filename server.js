@@ -6,10 +6,12 @@ require("dotenv").config();
 require("./models/ModelProducts");
 require("./models/ModelClients");
 require("./models/ModelTransactions");
+require("./models/ModelSuppliers");
 
 const ProductsSchema = mongoose.model("products");
 const ClientsSchema = mongoose.model("clients");
 const TransactionsSchema = mongoose.model("transactions");
+const SuppliersSchema = mongoose.model("suppliers");
 
 app.use(express.json());
 app.use(cors());
@@ -94,6 +96,131 @@ app.delete("/clients/:id", (req, res) => {
     });
   });
 });
+
+// ============================= Suppliers Routes =================================
+
+
+app.get("/suppliers", (req, res) => {
+  SuppliersSchema.find().sort({'_id': -1})
+    .then((suppliers) => {
+      return res.json(suppliers);
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        error: true,
+        message: "Supplier not found!",
+      });
+    });
+});
+
+app.post("/suppliers", (req, res) => {
+  const suppliers = SuppliersSchema.create(req.body, (error) => {
+    if (error)
+      return res.status(400).json({
+        error: true,
+        message: "Error: Not saved, try again!",
+      });
+    return res.status(200).json({
+      error: false,
+      message: "Saved!",
+    });
+  });
+});
+
+app.put("/suppliers/:id", (req, res) => {
+  const suppliers = SuppliersSchema.updateOne(
+    { _id: req.params.id },
+    req.body,
+    (error) => {
+      if (error)
+        return res.status(400).json({
+          error: true,
+          message: "Error: Document not updated! Try again!",
+        });
+      return res.json({
+        error: false,
+        message: "Sucess! Document updated!",
+      });
+    }
+  );
+});
+
+app.delete("/suppliers/:id", (req, res) => {
+  const suppliers = SuppliersSchema.deleteOne({ _id: req.params.id }, (error) => {
+    if (error)
+      return res.status(400).json({
+        error: true,
+        message: "Error: Supplier is not deleted!",
+      });
+    return res.json({
+      error: false,
+      message: "Supplier Deleted",
+    });
+  });
+});
+
+// ============================== PRODUCTS ROUTES ==============================
+
+app.get("/products", (req, res) => {
+  ProductsSchema.find().sort({'_id': -1})
+    .then((products) => {
+      return res.json(products);
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        error: true,
+        message: "Product not found!",
+      });
+    });
+});
+
+app.post("/products", (req, res) => {
+  const products = ProductsSchema.create(req.body, (error) => {
+    if (error)
+      return res.status(400).json({
+        error: true,
+        message: "Error: Not saved, try again!",
+      });
+    return res.status(200).json({
+      error: false,
+      message: "Saved!",
+    });
+  });
+});
+
+app.put("/products/:id", (req, res) => {
+  const products = ProductsSchema.updateOne(
+    { _id: req.params.id },
+    req.body,
+    (error) => {
+      if (error)
+        return res.status(400).json({
+          error: true,
+          message: "Error: Document not updated! Try again!",
+        });
+      return res.json({
+        error: false,
+        message: "Sucess! Document updated!",
+      });
+    }
+  );
+});
+
+app.delete("/products/:id", (req, res) => {
+  const products = ProductsSchema.deleteOne({ _id: req.params.id }, (error) => {
+    if (error)
+      return res.status(400).json({
+        error: true,
+        message: "Error: Product is not deleted!",
+      });
+    return res.json({
+      error: false,
+      message: "Product Deleted",
+    });
+  });
+});
+
+
 
 // ============================== PRODUCTS ROUTES ==============================
 
