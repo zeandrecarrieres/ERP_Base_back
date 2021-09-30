@@ -5,11 +5,13 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 require("./models/ModelProducts");
 require("./models/ModelClients");
+require("./models/ModelUsers");
 require("./models/ModelTransactions");
 require("./models/ModelSuppliers");
 
 const ProductsSchema = mongoose.model("products");
 const ClientsSchema = mongoose.model("clients");
+const UsersSchema = mongoose.model("users");
 const TransactionsSchema = mongoose.model("transactions");
 const SuppliersSchema = mongoose.model("suppliers");
 
@@ -158,6 +160,69 @@ app.delete("/suppliers/:id", (req, res) => {
     });
   });
 });
+
+
+// ============================== USERS ROUTES ==============================
+
+app.get("/users", (req, res) => {
+  UsersSchema.find().sort({'_id': -1})
+    .then((users) => {
+      return res.json(users);
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        error: true,
+        message: "User not found!",
+      });
+    });
+});
+
+app.post("/users", (req, res) => {
+  const users = UsersSchema.create(req.body, (error) => {
+    if (error)
+      return res.status(400).json({
+        error: true,
+        message: "Error: User not saved, try again!",
+      });
+    return res.status(200).json({
+      error: false,
+      message: "User Saved!",
+    });
+  });
+});
+
+app.put("/users/:id", (req, res) => {
+  const users = UsersSchema.updateOne(
+    { _id: req.params.id },
+    req.body,
+    (error) => {
+      if (error)
+        return res.status(400).json({
+          error: true,
+          message: "Error: User not updated! Try again!",
+        });
+      return res.json({
+        error: false,
+        message: "Sucess! User updated!",
+      });
+    }
+  );
+});
+
+app.delete("/users/:id", (req, res) => {
+  const users = UsersSchema.deleteOne({ _id: req.params.id }, (error) => {
+    if (error)
+      return res.status(400).json({
+        error: true,
+        message: "Error: User is not deleted!",
+      });
+    return res.json({
+      error: false,
+      message: "User Deleted",
+    });
+  });
+});
+
 
 // ============================== PRODUCTS ROUTES ==============================
 

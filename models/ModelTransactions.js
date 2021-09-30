@@ -14,6 +14,14 @@ const TransactionsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    user: {
+      type: String,
+      required: true,
+    },
+    comission: {
+      type: Number,
+      required: true,
+    },
     product: {
       type: String,
       required: true,
