@@ -25,6 +25,10 @@ const ProductsSchema = new mongoose.Schema(
     reference_price: {
       type: Number,
       required: true,
+    },
+    qtde: {
+      type: Number,
+      required: true,
     }
   },
   {
