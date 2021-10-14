@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const TransactionsSchema = new mongoose.Schema(
   {
     date: {
-      type: String,
+      type: Date,
       required: true,
     },
     type: {
@@ -36,6 +36,18 @@ const TransactionsSchema = new mongoose.Schema(
     },
     total_price: {
       type: Number,
+      required: true,
+    },
+    condition_payment: {
+      type: String,
+      required: true,
+    },
+    vcto: {
+      type: Date,
+      required: true,
+    },
+    form_payment: {
+      type: String,
       required: true,
     },
     obs: {
