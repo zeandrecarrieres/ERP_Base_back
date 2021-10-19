@@ -22,22 +22,26 @@ const TransactionsSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    product: {
-      type: String,
+    productListItems: {
+      type: Array,
       required: true,
     },
-    qtde: {
-        type: Number,
-        required: true,
-      },
-    reference_price: {
-      type: Number,
-      required: true,
-    },
-    total_price: {
-      type: Number,
-      required: true,
-    },
+    // product: {
+    //   type: String,
+    //   required: true,
+    // },
+    // qtde: {
+    //     type: Number,
+    //     required: true,
+    //   },
+    // reference_price: {
+    //   type: Number,
+    //   required: true,
+    // },
+    // total_price: {
+    //   type: Number,
+    //   required: true,
+    // },
     condition_payment: {
       type: String,
       required: true,
