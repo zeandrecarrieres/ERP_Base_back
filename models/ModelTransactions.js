@@ -38,10 +38,10 @@ const TransactionsSchema = new mongoose.Schema(
     //   type: Number,
     //   required: true,
     // },
-    // total_price: {
-    //   type: Number,
-    //   required: true,
-    // },
+    totalValue: {
+      type: Number,
+      required: true,
+    },
     condition_payment: {
       type: String,
       required: true,
