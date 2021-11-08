@@ -302,6 +302,21 @@ app.get("/products", (req, res) => {
     });
 });
 
+app.get("/products/:id", (req, res) => {
+  ProductsSchema.findOne({_id: req.params.id})
+    .then((products) => {
+      return res.json(products);
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        error: true,
+        message: "Product not found!",
+      });
+    });
+});
+
+
+
 app.post("/products", (req, res) => {
   const products = ProductsSchema.create(req.body, (error) => {
     if (error)
