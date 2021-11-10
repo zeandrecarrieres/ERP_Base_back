@@ -53,6 +53,20 @@ app.get("/clients", (req, res) => {
     });
 });
 
+app.get("/clients/:id", (req, res) => {
+  ClientsSchema.findOne({_id: req.params.id})
+    .then((clients) => {
+      return res.json(clients);
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        error: true,
+        message: "Client not found!",
+      });
+    });
+});
+
+
 app.post("/clients", (req, res) => {
   const clients = ClientsSchema.create(req.body, (error) => {
     if (error)
@@ -127,6 +141,19 @@ app.post("/suppliers", (req, res) => {
       message: "Saved!",
     });
   });
+});
+
+app.get("/suppliers/:id", (req, res) => {
+  SuppliersSchema.findOne({_id: req.params.id})
+    .then((suppliers) => {
+      return res.json(suppliers);
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        error: true,
+        message: "Supplier not found!",
+      });
+    });
 });
 
 app.put("/suppliers/:id", (req, res) => {
