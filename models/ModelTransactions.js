@@ -22,6 +22,28 @@ const TransactionsSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    // productListItems: {
+    //   itemName:{
+    //     type: String,
+    //     required: true,
+    //   },
+    //   itemQtde:{
+    //     type: Number,
+    //     required: true,
+    //   },
+    //   itemPrice:{
+    //     type: String,
+    //     required: true,
+    //   },
+    //   itemDiscount:{
+    //     type: Number,
+    //     required: true,
+    //   },
+    //   itemTotalPrice:{
+    //     type: Number,
+    //     required: true,
+    //   }
+    // },
     productListItems: {
       type: Array,
       required: true,
@@ -52,6 +74,14 @@ const TransactionsSchema = new mongoose.Schema(
     },
     form_payment: {
       type: String,
+      required: true,
+    },
+    transport: {
+      type: Number,
+      required: true,
+    },
+    depense: {
+      type: Number,
       required: true,
     },
     obs: {

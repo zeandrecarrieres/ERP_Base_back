@@ -405,6 +405,20 @@ app.get("/transactions", (req, res) => {
     });
 });
 
+app.get("/transactions/:id", (req, res) => {
+  TransactionsSchema.findOne({_id: req.params.id})
+    .then((transactions) => {
+      return res.json(transactions);
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        error: true,
+        message: "Transaction not found!",
+      });
+    });
+});
+
+
 app.post("/transactions", (req, res) => {
   const transactions = TransactionsSchema.create(req.body, (error) => {
     if (error)
